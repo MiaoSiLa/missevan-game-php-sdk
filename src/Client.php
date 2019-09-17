@@ -82,17 +82,6 @@ class Client
         return json_decode($output, $as_array);
     }
 
-    public function postUserLogin($params, $as_array = true)
-    {
-        $headers = [
-            'User-Agent' => 'MissEvanApp/4.3.3 (iOS;12.0;iPhone9,1)',
-            'Cookie' => 'equip_id=1cd36ca3-d966-4e4e-8499-98a60987b78a',
-        ];
-        $output = $this->request(self::METHOD_POST, '/user/login', $params, $headers);
-
-        return json_decode($output, $as_array);
-    }
-
     /**
      * 发起请求
      *

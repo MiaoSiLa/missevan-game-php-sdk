@@ -18,8 +18,8 @@ $client = new Client($app_id, $merchant_id, $access_id, $access_secret);
 $client->setGatewayURL($getway_url);
 
 // 查询用户信息
-//$result = $client->queryUserInfo(['token' => '2|5d809a482f66aa4f4f93b110|33037d3bf648260c|1568709192|4237748454c9daf2589a59cbfbbbd686432968068f14646b']);
-//var_export($result);
+$result = $client->queryUserInfo(['token' => '2|5d809a482f66aa4f4f93b110|33037d3bf648260c|1568709192|4237748454c9daf2589a59cbfbbbd686432968068f14646b']);
+var_export($result);
 // 返回示例
 /*
 array (
@@ -37,8 +37,8 @@ array (
 */
 
 // 查询订单
-//$result = $client->queryOrder(['tr_no' => '12345678901234567890123456789012', 'uid' => '3013620']);
-//var_export($result);
+$result = $client->queryOrder(['tr_no' => '12345678901234567890123456789012', 'uid' => '3013620']);
+var_export($result);
 // 返回示例
 /*
 array (
@@ -63,6 +63,3 @@ array (
   'timestamp' => 1568702546,
 )
 */
-
-$result = $client->postUserLogin(['account' => '13789137894', 'password' => '123456']);
-print_r($result);
