@@ -3,16 +3,12 @@
 namespace MaoerGame;
 
 /**
- * Class Util 工具类
+ * Class Signature 签名处理类
  *
  * @package MaoerGame
  */
-class Util
+class Signature
 {
-    public static function getURI($gateway_url, $api)
-    {
-        return $gateway_url . $api;
-    }
 
     /**
      * 转义 uri 字符
@@ -49,18 +45,18 @@ class Util
      * @param string $token
      * @param string $method GET|POST
      * @param string $uri
-     * @param array $params 结构 ['query' => [], 'post' => [], 'raw_body' => '', 'files' => []]
+     * @param array $params 结构 ['GET' => [], 'POST' => [], 'RAW_BODY' => '', 'FILES' => []]
      * @param array $headers
      * @param string $content_type
      * @return string
      *
      * @throws \Exception
      */
-    public function buildSign($access_secret, $token, $method, $uri, $params, $headers, $content_type)
+    public static function buildSign($access_secret, $token, $method, $uri, $params, $headers, $content_type = 'application/x-www-form-urlencoded')
     {
         self::processParams($params);
         $canonical_url = self::uriEncode($uri, false);
-        $canonical_query_str = self::getCanonicalQueryStr($params['query']);
+        $canonical_query_str = self::getCanonicalQueryStr($params['GET']);
         $canonical_headers = self::getCanonicalHeaders($headers, $token);
 
         $str_to_sign = $method . "\n"
@@ -80,17 +76,17 @@ class Util
      */
     private static function processParams(&$params)
     {
-        if (!array_key_exists('query', $params)) {
-            $params['query'] = [];
+        if (!array_key_exists('GET', $params)) {
+            $params['GET'] = [];
         }
-        if (!array_key_exists('post', $params)) {
-            $params['post'] = [];
+        if (!array_key_exists('POST', $params)) {
+            $params['POST'] = [];
         }
-        if (!array_key_exists('raw_body', $params)) {
-            $params['raw_body'] = '';
+        if (!array_key_exists('RAW_BODY', $params)) {
+            $params['RAW_BODY'] = '';
         }
-        if (!array_key_exists('files', $params)) {
-            $params['files'] = [];
+        if (!array_key_exists('FILES', $params)) {
+            $params['FILES'] = [];
         }
     }
 
@@ -151,15 +147,21 @@ class Util
     private static function getCanonicalHeaders($headers, $token)
     {
         $header_names = array_keys($headers);
-        $pattern = '/^(x-m-.*)$/i';
-        $need_headers = [];
+        $pattern_xm = '/^(x-m-.*)$/i';
+        $pattern_cookie = '/^cookie$/i';
+        $pattern_equip_id = '/.*equip_id=(.+)&?/';
+        $need_headers = ['equip_id' => 'equip_id:'];
         foreach ($header_names as $name) {
-            if (preg_match($pattern, $name)) {
+            if (preg_match($pattern_xm, $name)) {
                 $need_headers[$name] = strtolower($name) . ':' . trim($headers[$name]);
+            } elseif (preg_match($pattern_cookie, $name) && preg_match($pattern_equip_id, $headers[$name], $match)) {
+                $need_headers['equip_id'] = 'equip_id:' . $match[1];
             }
         }
-        $need_headers['token'] ='token:' . trim($token);
-        ksort($need_headers);
+        if ($token = trim($token)) {
+            $need_headers['token'] ='token:' . $token;
+        }
+        sort($need_headers);
         return implode("\n", $need_headers);
     }
 
@@ -167,21 +169,19 @@ class Util
      * 获得用于验签的 body 字符串
      *
      * @param $content_type
-     * @param array $post_params
-     * @param string $raw_body
-     * @param array $files (结构同 $_FILES)
+     * @param array $params 结构 ['GET' => [], 'POST' => [], 'RAW_BODY' => '', 'FILES' => []]
      * @return string
      * @throws \Exception
      */
-    private static function getCanonicalBody($content_type, $post_params, $raw_body = '', $files = [])
+    private static function getCanonicalBody($content_type, $params)
     {
         if (strpos($content_type, 'application/x-www-form-urlencoded') !== false) {
-            $content = self::getPostParamStr($post_params);
+            $content = self::getPostParamStr($params['POST']);
         } elseif (strpos($content_type, 'multipart/form-data') !== false) {
-            $content = self::getPostParamStr($post_params);
-            if (!empty($files)) {
+            $content = self::getPostParamStr($params['POST']);
+            if (!empty($params['FILES'])) {
                 $param_names = [];
-                foreach ($files as $param_name => $param) {
+                foreach ($params['FILES'] as $param_name => $param) {
                     if (is_array($param['name'])) {
                         foreach ($param['name'] as $value) {
                             $param_names[] = self::uriEncode($param_name . '[]');
@@ -196,8 +196,8 @@ class Util
                 $content = $content . "\n" . $unsigned_params;
             }
         } elseif (strpos($content_type, 'application/json') !== false) {
-            $content = $raw_body;
-        } elseif (!$content_type && !$raw_body) {
+            $content = $params['RAW_BODY'];
+        } elseif (!$content_type && !$params['RAW_BODY']) {
             $content = '';
         } else {
             throw new \Exception('不支持的 MIME 类型');
