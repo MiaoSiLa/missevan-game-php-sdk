@@ -2,6 +2,11 @@
 
 namespace MaoerGame;
 
+/**
+ * Class Util 工具类
+ *
+ * @package MaoerGame
+ */
 class Util
 {
     public static function getURI($gateway_url, $api)
