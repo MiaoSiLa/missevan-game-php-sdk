@@ -1,0 +1,23 @@
+{
+    "name": "xchenhao/maoergame-sdk",
+    "description": "php client for maoer game sdk",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xchenhao",
+            "email": "chenhao_apple@163.com"
+        }
+    ],
+    "version": "v1.0.0",
+    "minimum-stability": "stable",
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "MaoerGame\\": "src/"
+        }
+    }
+}
