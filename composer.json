@@ -1,5 +1,5 @@
 {
-    "name": "xchenhao/maoergame-sdk",
+    "name": "xchenhao/maoergame-sdk-phpclient",
     "description": "php client for maoer game sdk",
     "type": "library",
     "license": "MIT",
