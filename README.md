@@ -10,7 +10,7 @@ $client = new Client('app_id', 'merchant_id', 'access_id', 'access_secret');
 // 设置网关地址
 $client->setGatewayURL('getway_url');
 // 请求 API
-$result = $client->queryUserInfo(['key' => 'value']);
+$result = $client->queryUserInfo(['token' => 'xxxxxx']);
 print_r($result);
 ```
 
