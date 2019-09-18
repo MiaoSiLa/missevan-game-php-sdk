@@ -1,6 +1,11 @@
 ### PHP Client for Maoer Game SDK
 
-#### 应用示例（见 ./demo.php）
+#### 启用
+```sh
+composer require xchenhao/maoergame-sdk-phpclient
+```
+
+#### 示例（见 ./demo.php）
 
 ```php
 use MaoerGame\Client;
