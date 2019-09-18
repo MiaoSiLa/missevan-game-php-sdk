@@ -1,10 +1,9 @@
 <?php
 
-require './src/Client.php';
-require './src/Http.php';
-require './src/Signature.php';
+require __DIR__ . '/vendor/autoload.php';
 
 use MaoerGame\Client;
+use MaoerGame\Signature;
 
 $app_id = '8';
 $merchant_id = '3000';
@@ -62,4 +61,12 @@ array (
   'request_id' => '12312321',
   'timestamp' => 1568702546,
 )
+*/
+
+// 检验回调结果签名是否正确
+$bool = Signature::verifyCallbackSign($_POST, $access_secret);
+var_export($bool);
+// 返回示例
+/*
+true
 */

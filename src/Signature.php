@@ -217,4 +217,26 @@ class Signature
         return self::formatRequestKeyValue($post_params);
     }
 
+    /**
+     * 检验回调结果签名是否正确
+     *
+     * @param array $post_params
+     * @param string $access_secret
+     * @return bool
+     */
+    public static function verifyCallbackSign($post_params, $access_secret)
+    {
+        if (array_key_exists('data', $post_params)) {
+            return false;
+        }
+        $data_array = json_decode($post_params['data'], true) ?: [];
+        if (empty($data_array)) {
+            return false;
+        }
+        if (!array_key_exists('sign', $data_array)) {
+            return false;
+        }
+        return md5($post_params['data'] . $access_secret) === $data_array['sign'];
+    }
+
 }

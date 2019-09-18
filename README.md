@@ -22,6 +22,11 @@ print_r($result);
 #### API
 
 | API | 方法 | 说明 |
-|---|---|---|
+| --- | --- | --- |
 | /api/userinfo | queryUserInfo(array params, bool $as_array) | 查询用户信息 |
 | /api/get-order | queryOrder(array params, bool $as_array) | 查询订单 |
+
+#### 其它方法
+| 方法 | 说明 |
+| --- | --- |
+| verifyCallbackSign(array $post_params, string $access_secret) | 检验回调签名 |
