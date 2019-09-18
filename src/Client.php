@@ -92,7 +92,7 @@ class Client
      * @return string json body string
      * @throws \Exception
      */
-    private function request($method, $api, $params, $header = [])
+    public function request($method, $api, $params, $header = [])
     {
         $uri = $this->gateway_url . $api;
         $header = array_merge(self::getDefaultHeader(), $header);
