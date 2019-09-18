@@ -149,7 +149,7 @@ class Signature
         $header_names = array_keys($headers);
         $pattern_xm = '/^(x-m-.*)$/i';
         $pattern_cookie = '/^cookie$/i';
-        $pattern_equip_id = '/.*equip_id=(.+)&?/';
+        $pattern_equip_id = '/.*equip_id=(.+);?/';
         $need_headers = ['equip_id' => 'equip_id:'];
         foreach ($header_names as $name) {
             if (preg_match($pattern_xm, $name)) {
