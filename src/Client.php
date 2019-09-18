@@ -14,6 +14,8 @@ class Client
 
     // 配置参数
     private $config = [];
+    private $access_secret = '';
+
     // 网关地址
     private $gateway_url = '';
 
@@ -40,8 +42,8 @@ class Client
             'app_id' => $app_id,
             'merchant_id' => $merchant_id,
             'access_id' => $access_id,
-            'access_secret' => $access_secret,
         ];
+        $this->access_secret = $access_secret;
     }
 
     /**
@@ -100,7 +102,7 @@ class Client
 
         if (self::METHOD_GET === $method) {
             $sign = Signature::buildSign(
-                $this->config['access_secret'],
+                $this->access_secret,
                 '',
                 self::METHOD_GET,
                 $uri,
@@ -112,10 +114,10 @@ class Client
             return Http::instance()->curl_get($uri . '?' . http_build_query($params), $header);
         } else {
             $sign = Signature::buildSign(
-                $this->config['access_secret'],
+                $this->access_secret,
                 '',
                 self::METHOD_POST,
-                $this->gateway_url . '/user/login',
+                $uri,
                 [self::METHOD_POST => $params],
                 $header,
             'multipart/form-data'
