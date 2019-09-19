@@ -64,7 +64,8 @@ array (
 */
 
 // 检验回调结果签名是否正确
-$bool = Signature::verifyCallbackSign($_POST, $access_secret);
+$body = file_get_contents('php://input');
+$bool = Signature::verifyCallbackSign($body, $access_secret);
 var_export($bool);
 // 返回示例
 /*
