@@ -29,4 +29,4 @@ print_r($result);
 #### 其它方法
 | 方法 | 说明 |
 | --- | --- |
-| verifyCallbackSign(array $post_params, string $access_secret) | 检验回调签名 |
+| verifyCallbackSign(string $raw_body, string $access_secret) | 检验回调签名 |
