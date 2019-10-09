@@ -1,5 +1,5 @@
 {
-    "name": "miaosila/missevan-game-php-sdk ",
+    "name": "miaosila/missevan-game-php-sdk",
     "description": "php sdk client for missevan-game",
     "type": "library",
     "license": "MIT",

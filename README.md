@@ -1,8 +1,8 @@
-### PHP Client for Maoer Game SDK
+### PHP SDK Client for MissEvan Game
 
 #### 启用
 ```sh
-composer require xchenhao/maoergame-sdk-phpclient
+composer require miaosila/missevan-game-php-sdk
 ```
 
 #### 示例（见 ./demo.php）
