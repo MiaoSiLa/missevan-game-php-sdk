@@ -1,14 +1,8 @@
 {
-    "name": "xchenhao/maoergame-sdk-phpclient",
-    "description": "php client for maoer game sdk",
+    "name": "miaosila/missevan-game-php-sdk ",
+    "description": "php sdk client for missevan-game",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "xchenhao",
-            "email": "chenhao_apple@163.com"
-        }
-    ],
     "version": "v1.0.0",
     "minimum-stability": "stable",
     "require": {
@@ -17,7 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MaoerGame\\": "src/"
+            "MissEvanGame\\": "src/"
         }
     }
 }

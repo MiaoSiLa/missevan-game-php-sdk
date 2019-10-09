@@ -1,11 +1,11 @@
 <?php
 
-namespace MaoerGame;
+namespace MissEvanGame;
 
 /**
  * Class Client
  *
- * @package MaoerGame
+ * @package MissEvanGame
  */
 class Client
 {

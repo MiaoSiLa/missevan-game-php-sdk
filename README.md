@@ -8,7 +8,7 @@ composer require xchenhao/maoergame-sdk-phpclient
 #### 示例（见 ./demo.php）
 
 ```php
-use MaoerGame\Client;
+use MissEvanGame\Client;
 
 // 初始化配置
 $client = new Client('app_id', 'merchant_id', 'access_id', 'access_secret');

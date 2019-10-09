@@ -2,8 +2,8 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use MaoerGame\Client;
-use MaoerGame\Signature;
+use MissEvanGame\Client;
+use MissEvanGame\Signature;
 
 $app_id = '8';
 $merchant_id = '3000';

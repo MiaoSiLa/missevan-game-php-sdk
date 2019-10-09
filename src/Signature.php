@@ -1,11 +1,11 @@
 <?php
 
-namespace MaoerGame;
+namespace MissEvanGame;
 
 /**
  * Class Signature 签名处理类
  *
- * @package MaoerGame
+ * @package MissEvanGame
  */
 class Signature
 {

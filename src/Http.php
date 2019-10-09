@@ -1,11 +1,11 @@
 <?php
 
-namespace MaoerGame;
+namespace MissEvanGame;
 
 /**
  * Class Http 发送 HTTP 请求类
  *
- * @package MaoerGame
+ * @package MissEvanGame
  */
 class Http
 {
@@ -21,7 +21,7 @@ class Http
 
     private static function getUserAgent()
     {
-        return sprintf('MaoerGameSDK PHPClient/%s', Client::SDK_VERSION);
+        return sprintf('MissEvanGame SDK PHPClient/%s', Client::SDK_VERSION);
     }
 
     /**
