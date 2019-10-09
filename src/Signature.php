@@ -54,6 +54,8 @@ class Signature
      */
     public static function buildSign($access_secret, $token, $method, $uri, $params, $headers, $content_type = 'application/x-www-form-urlencoded')
     {
+        // WORKAROUND: 暂时兼容 80 与 443 端口
+        $uri = str_replace([':80', ':443'], '', $uri);
         self::processParams($params);
         $canonical_url = self::uriEncode($uri, false);
         $canonical_query_str = self::getCanonicalQueryStr($params['GET']);
