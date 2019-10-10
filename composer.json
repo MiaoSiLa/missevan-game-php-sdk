@@ -5,6 +5,7 @@
     "license": "MIT",
     "version": "v1.0.0",
     "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "ext-curl": "*",
         "ext-json": "*"
