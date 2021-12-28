@@ -33,4 +33,4 @@ print_r($result);
 
 #### 猫儿游戏服务端接口文档
 
-- [接口文档地址](https://github.com/MiaoSiLa/missevan-game-php-sdk/blob/master/doc)
+- [接口文档地址](https://github.com/MiaoSiLa/missevan-game-php-sdk/blob/master/doc/猫耳游戏服务端接口文档.md)
